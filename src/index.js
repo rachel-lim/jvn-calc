@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 function TotalReduction(props) {
-	let driven = props.values.driven.reduce((prod, val) => prod*val)
-	let driving = props.values.driving.reduce((prod, val) => prod*val)
-	let reduction = driven/driving
+	const driven = props.values.driven.reduce((prod, val) => prod*val)
+	const driving = props.values.driving.reduce((prod, val) => prod*val)
+	const reduction = driven/driving
 	let freeSpeed = 1
 	switch (props.values.motor) {
 		case 'CIM':
@@ -23,8 +23,8 @@ function TotalReduction(props) {
 		default:
 			freeSpeed = 1;
 	}
-	let dtFreeSpeed = freeSpeed*props.values.wheelDiameter*3.142*(1/reduction)/12/60
-	let dtAdjSpeed = dtFreeSpeed*props.values.speedLoss/100
+	const dtFreeSpeed = freeSpeed*props.values.wheelDiameter*3.142*(1/reduction)/12/60
+	const dtAdjSpeed = dtFreeSpeed*props.values.speedLoss/100
 
 	return (
 		<fieldset style={{width: "300px"}}>
@@ -67,7 +67,7 @@ class JVNCalc extends React.Component {
   }
 
   handleChangeGearing(event, ind) {
-	let newIds = [...this.state.driving];
+	let newIds = [...this.state[event.target.name]];
 	console.log(event.target.value);
 	newIds[ind] = event.target.value;
 	this.setState({[event.target.name]: newIds});
@@ -116,15 +116,15 @@ class JVNCalc extends React.Component {
         	<div style={divStyle}>
         		<div style={{textAlign: 'center'}}>driving</div>
         		<div style={{textAlign: 'center'}}>driven</div>
-        		<div><input style={{width: "75px"}} name="driving" onChange={event => this.handleChangeGearing(event, 0)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" onChange={event => this.handleChangeGearing(event, 0)}/></div>
-        		<div><input style={{width: "75px"}} name="driving" onChange={event => this.handleChangeGearing(event, 1)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" onChange={event => this.handleChangeGearing(event,1)}/></div>
-        		<div><input style={{width: "75px"}} name="driving" onChange={event => this.handleChangeGearing(event, 2)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" onChange={event => this.handleChangeGearing(event,2)}/></div>
+        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
+        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
+        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[1]} onChange={event => this.handleChangeGearing(event, 1)}/></div>
+        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[1]} onChange={event => this.handleChangeGearing(event,1)}/></div>
+        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[2]} onChange={event => this.handleChangeGearing(event, 2)}/></div>
+        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[2]} onChange={event => this.handleChangeGearing(event,2)}/></div>
         	</div>
         </fieldset>
-        <TotalReduction values={this.state} driven={this.state.driven}/>
+        <TotalReduction values={this.state}/>
       </form>
     );
   }
