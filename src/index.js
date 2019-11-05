@@ -27,21 +27,33 @@ function TotalReduction(props) {
 	const dtAdjSpeed = dtFreeSpeed*props.values.speedLoss/100
 
 	return (
-		<fieldset style={{width: "300px"}}>
-			<legend>output</legend>
-			reduction: {reduction}:1 
-			<div/>
-			free speed: {dtFreeSpeed} fps
-			<div/>
-			adj speed: {dtAdjSpeed} fps
-		</fieldset>
+		<div style={{width: "300px", margin: "auto"}}>
+			<h1>output</h1>
+      <div style={outputLabel}>overall reduction:</div><output>{reduction.toFixed(2)}:1</output>
+			<div style={outputLabel}>free speed:</div><output>{dtFreeSpeed.toFixed(2)} fps</output>
+			<div style={outputLabel}>adjusted speed:</div><output>{dtAdjSpeed.toFixed(2)} fps</output>
+		</div>
 	);
 }
 
 const divStyle = {
 	display: 'grid',
 	gridTemplateColumns: '1fr 1fr',
-	width: '150px'
+  float: 'center',
+  padding: '0px 50px 0px 50px'
+};
+
+const label = {
+  display: 'inline-block',
+  width: '250px',
+  textAlign: 'left'
+};
+
+const outputLabel = {
+  display: 'inline-block',
+  width: '150px',
+  textAlign: 'left',
+  float: 'left'
 };
 
 class JVNCalc extends React.Component {
@@ -56,7 +68,7 @@ class JVNCalc extends React.Component {
     	weight: 154,
     	weightOnDriven: 100,
     	wheelDiameter: 4,
-    	wheelCoeff: 1,
+    	wheelCoeff: 1.1,
     	driving: [1,1,1], 
     	driven: [1,1,1]};
 
@@ -75,57 +87,55 @@ class JVNCalc extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <fieldset style={{width: "300px"}}>
-          <legend>motor</legend>
+      <div className="App">
+        <form>
+          <h1>motor</h1>
           <select name="motor" value={this.state.motor} onChange={event => this.handleChange(event)}>
             <option value="CIM">CIM</option>
             <option value="MiniCIM">MiniCIM</option>
             <option value="NEO">NEO</option>
             <option value="Falcon">Falcon</option>
           </select>
-        </fieldset>
-        <fieldset style={{width: "300px"}}>
-        	<legend>drivetrain</legend>
-        	speed loss constant [%]: 
+        	<h1>drivetrain</h1>
+        	<div style={label}>speed loss constant [%]:</div>
         	<input style={{width: "30px"}} name="speedLoss" value={this.state.speedLoss} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	drivetrain effeciency [%]: 
+
+          <div style={label}>drivetrain effeciency [%]:</div>
         	<input style={{width: "30px"}} name="effeciency" value={this.state.effeciency} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	number of gearboxes [#]:
+
+        	<div style={label}>number of gearboxes [#]:</div>
         	<input style={{width: "30px"}} name="numGearboxes" value={this.state.numGearboxes} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	number of motors per gearbox [#]:
+        	
+          <div style={label}>number of motors per gearbox [#]:</div>
         	<input style={{width: "30px"}} name="numMotors" value={this.state.numMotors} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	total weight [lb]:
+
+        	<div style={label}>total weight [lb]:</div>
         	<input style={{width: "30px"}} name="weight" value={this.state.weight} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	weight on driven wheels [%]:
+
+        	<div style={label}>weight on driven wheels [%]:</div>
         	<input style={{width: "30px"}} name="weightOnDriven" value={this.state.weightOnDriven} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	wheel diameter [in]:
+
+        	<div style={label}>wheel diameter [in]:</div>
         	<input style={{width: "30px"}} name="wheelDiameter" value={this.state.wheelDiameter} onChange={event => this.handleChange(event)}/>
-        	<div/>
-        	wheel coeffecient:
+
+        	<div style={label}>wheel coeffecient:</div>
         	<input style={{width: "30px"}} name="wheelCoeff" value={this.state.wheelCoeff} onChange={event => this.handleChange(event)}/>
-        </fieldset>
-        <fieldset style={{width: "300px"}}>
-        	<legend>gearing</legend>
-        	<div style={divStyle}>
-        		<div style={{textAlign: 'center'}}>driving</div>
-        		<div style={{textAlign: 'center'}}>driven</div>
-        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
-        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[1]} onChange={event => this.handleChangeGearing(event, 1)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[1]} onChange={event => this.handleChangeGearing(event,1)}/></div>
-        		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[2]} onChange={event => this.handleChangeGearing(event, 2)}/></div>
-        		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[2]} onChange={event => this.handleChangeGearing(event,2)}/></div>
-        	</div>
-        </fieldset>
+          	<h1>gearing</h1>
+            	<div style={divStyle}>
+            		<div>driving</div>
+            		<div>driven</div>
+            		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
+            		<div><input style={{width: "75px"}} name="driven" value={this.state.driven[0]} onChange={event => this.handleChangeGearing(event, 0)}/></div>
+
+            		<div><input style={{width: "75px"}} name="driving" value={this.state.driving[1]} onChange={event => this.handleChangeGearing(event, 1)}/></div>
+                <div><input style={{width: "75px"}} name="driven" value={this.state.driven[1]} onChange={event => this.handleChangeGearing(event,1)}/></div>
+            		
+                <div><input style={{width: "75px"}} name="driving" value={this.state.driving[2]} onChange={event => this.handleChangeGearing(event, 2)}/></div>
+                <div><input style={{width: "75px"}} name="driven" value={this.state.driven[2]} onChange={event => this.handleChangeGearing(event,2)}/></div>
+            	</div>
         <TotalReduction values={this.state}/>
       </form>
+      </div>
     );
   }
 }
