@@ -89,7 +89,6 @@ function getFalconPinion(props) {
 	return pinion;
 }
 
-function getCimPinion(props) {
 	let pinion = ''
 	switch (props) {
 		case '9':
@@ -118,25 +117,25 @@ function getHalfHexGear(props) {
 	let gear = ''
 	switch (props) {
 		case '18':
-			gear = ['217-3209 (aluminum)', <br/>, '217-5460 (steel)'];
+			gear = ['217-3209', <br/>, '217-5460 (steel)'];
 			break
 		case '20':
-			gear = ['217-2702 (aluminum)', <br/>, '217-5461 (steel)'];
+			gear = ['217-2702', <br/>, '217-5461 (steel)'];
 			break
 		case '22':
-			gear = ['217-5462 (aluminum)', <br/>, '217-5463 (steel)'];
+			gear = ['217-5462', <br/>, '217-5463 (steel)'];
 			break
 		case '24':
-			gear = ['217-2704 (aluminum)', <br/>, '217-5464 (steel)'];
+			gear = ['217-2704', <br/>, '217-5464 (steel)'];
 			break
 		case '26':
-			gear = ['217-5465 (aluminum)', <br/>, '217-5466 (steel)'];
+			gear = ['217-5465', <br/>, '217-5466 (steel)'];
 			break
 		case '28':
-			gear = ['217-5467 (aluminum)', <br/>, '217-5468 (steel)'];
+			gear = ['217-5467', <br/>, '217-5468 (steel)'];
 			break
 		case '30':
-			gear = ['217-2705 (aluminum)', <br/>, '217-5469 (steel)'];
+			gear = ['217-2705', <br/>, '217-5469 (steel)'];
 			break
 		case '32':
 			gear = '217-5470';
@@ -190,7 +189,7 @@ function getHalfHexGear(props) {
 			gear = ['217-3575', <br/>, '217-2715 (with VersaKeys)'];
 			break
 		case '66':
-			gear = '217-5476';
+			gear = '217-5476 (with VersaKeys)';
 			break
 		case '68':
 			gear = '217-5477';
